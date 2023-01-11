@@ -4,7 +4,7 @@ export class Dollar {
     this.amount = amount;
   }
 
-  public times = (multiplier: number) => {
+  public times = (multiplier: number): Dollar => {
     return new Dollar(this.amount * multiplier);
   };
 
