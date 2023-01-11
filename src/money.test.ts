@@ -3,10 +3,10 @@ import { Dollar } from './money';
 describe('MoneyTest', () => {
   it('multiplication', () => {
     const five: Dollar = new Dollar(5);
-    const product: Dollar = five.times(2);
-    expect(product.amount).toBe(10);
-    const product2: Dollar = five.times(3);
-    expect(product2.amount).toBe(15);
+    expect(five.times(2).equals(new Dollar(10))).toBe(true);
+    expect(five.times(3).equals(new Dollar(15))).toBe(true);
+    // クラス同士の比較は、equalsメソッドを経由して行う必要がある
+    // ref: https://jestjs.io/docs/expect#toequalvalue
   });
   it('equals', () => {
     expect(new Dollar(5).equals(new Dollar(5))).toBe(true);
