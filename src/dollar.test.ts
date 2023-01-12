@@ -1,6 +1,6 @@
-import { Dollar } from './money';
+import { Dollar } from './dollar';
 
-describe('MoneyTest', () => {
+describe('DollarTest', () => {
   it('multiplication', () => {
     const five: Dollar = new Dollar(5);
     expect(five.times(2).equals(new Dollar(10))).toBe(true);

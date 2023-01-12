@@ -8,4 +8,8 @@ describe('FrancTest', () => {
     // クラス同士の比較は、equalsメソッドを経由して行う必要がある
     // ref: https://jestjs.io/docs/expect#toequalvalue
   });
+  it('equals', () => {
+    expect(new Franc(5).equals(new Franc(5))).toBe(true);
+    expect(new Franc(5).equals(new Franc(6))).toBe(false);
+  });
 });
