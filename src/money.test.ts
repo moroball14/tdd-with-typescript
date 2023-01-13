@@ -3,6 +3,8 @@ import { Franc } from './franc';
 
 describe('MoneyTest', () => {
   it('equals', () => {
-    expect(new Franc(5).equals(new Dollar(5))).toBe(false);
+    expect(Franc.createInstance(5).equals(Dollar.createInstance(5))).toBe(
+      false
+    );
   });
 });

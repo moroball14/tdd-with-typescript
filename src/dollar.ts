@@ -1,8 +1,12 @@
 import { Money } from './money';
 
 export class Dollar extends Money {
-  constructor(amount: number) {
+  private constructor(amount: number) {
     super(amount);
+  }
+
+  static createInstance(amount: number): Dollar {
+    return new Dollar(amount);
   }
 
   public times = (multiplier: number): Dollar => {
