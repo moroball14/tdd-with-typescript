@@ -1,7 +1,7 @@
-export abstract class Money {
+export class Money {
   protected amount: number;
   protected currency: string;
-  protected constructor(amount: number, currency: string) {
+  constructor(amount: number, currency: string) {
     this.amount = amount;
     this.currency = currency;
   }
@@ -9,7 +9,9 @@ export abstract class Money {
   // memo: createInstanceっていうabstractでstaticな関数作りたいけど作れない。。
   // ref: https://github.com/microsoft/TypeScript/issues/34516
 
-  abstract times(multiplier: number): Money;
+  public times = (multiplier: number): Money => {
+    return new Money(this.amount * multiplier, this.currency);
+  };
 
   public getCurrency = (): string => {
     return this.currency;
@@ -19,7 +21,7 @@ export abstract class Money {
     return this.amount === money.amount && this.compareInstance(money);
   };
 
-  protected abstract compareInstance(money: Money): boolean;
+  private compareInstance = (money: Money): boolean => {
+    return this.currency === money.currency;
+  };
 }
-
-// flyweightパターンとは何か？

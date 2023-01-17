@@ -8,12 +8,4 @@ export class Dollar extends Money {
   static createInstance(amount: number): Dollar {
     return new Dollar(amount, 'USD');
   }
-
-  public times = (multiplier: number): Dollar => {
-    return Dollar.createInstance(this.amount * multiplier);
-  };
-
-  protected compareInstance = (money: Money) => {
-    return this instanceof Dollar && money instanceof Dollar;
-  };
 }
