@@ -8,12 +8,4 @@ export class Franc extends Money {
   static createInstance(amount: number): Franc {
     return new Franc(amount, 'CHF');
   }
-
-  public times = (multiplier: number): Franc => {
-    return Franc.createInstance(this.amount * multiplier);
-  };
-
-  protected compareInstance = (money: Money) => {
-    return this instanceof Franc && money instanceof Franc;
-  };
 }
