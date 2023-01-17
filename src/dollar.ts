@@ -1,16 +1,16 @@
 import { Money } from './money';
 
 export class Dollar extends Money {
-  private constructor(amount: number) {
-    super(amount);
+  private constructor(amount: number, currency: string) {
+    super(amount, currency);
   }
 
   static createInstance(amount: number): Dollar {
-    return new Dollar(amount);
+    return new Dollar(amount, 'USD');
   }
 
   public times = (multiplier: number): Dollar => {
-    return new Dollar(this.amount * multiplier);
+    return Dollar.createInstance(this.amount * multiplier);
   };
 
   protected compareInstance = (money: Money) => {
