@@ -7,4 +7,8 @@ describe('MoneyTest', () => {
       false
     );
   });
+  it('currency', () => {
+    expect(Dollar.createInstance(1).getCurrency()).toBe('USD');
+    expect(Franc.createInstance(1).getCurrency()).toBe('CHF');
+  });
 });
