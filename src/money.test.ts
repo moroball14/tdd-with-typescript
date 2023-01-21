@@ -1,6 +1,7 @@
 import { Bank } from './bank';
 import { Expression } from './expression';
 import { Money } from './money';
+import { Sum } from './sum';
 
 describe('MoneyTest', () => {
   it('multiplication', () => {
@@ -19,11 +20,29 @@ describe('MoneyTest', () => {
     expect(Money.dollar(1).getCurrency()).toBe('USD');
     expect(Money.franc(1).getCurrency()).toBe('CHF');
   });
-  it('sum', () => {
+  it('simple add', () => {
     const five: Money = Money.dollar(5);
     const sum: Expression = five.plus(five);
     const bank: Bank = new Bank();
     const reduced: Money = bank.reduce(sum, 'USD');
     expect(reduced.equals(Money.dollar(10))).toBe(true);
+  });
+  it('plus return sum', () => {
+    const five: Money = Money.dollar(5);
+    const result: Expression = five.plus(five);
+    const sum: Sum = result as Sum;
+    expect(five.equals(sum.augend)).toBe(true);
+    expect(five.equals(sum.addend)).toBe(true);
+  });
+  it('reduce sum', () => {
+    const sum: Expression = new Sum(Money.dollar(3), Money.dollar(4));
+    const bank: Bank = new Bank();
+    const result: Money = bank.reduce(sum, 'USD');
+    expect(result.equals(Money.dollar(7))).toBe(true);
+  });
+  it('reduce money', () => {
+    const bank: Bank = new Bank();
+    const result: Money = bank.reduce(Money.dollar(1), 'USD');
+    expect(result.equals(Money.dollar(1))).toBe(true);
   });
 });
