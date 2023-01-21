@@ -45,4 +45,14 @@ describe('MoneyTest', () => {
     const result: Money = bank.reduce(Money.dollar(1), 'USD');
     expect(result.equals(Money.dollar(1))).toBe(true);
   });
+  it('reduce money different currency', () => {
+    const bank: Bank = new Bank();
+    bank.addRate('CHF', 'USD', 2);
+    const result: Money = bank.reduce(Money.franc(2), 'USD');
+    expect(result.equals(Money.dollar(1))).toBe(true);
+  });
+
+  it('identity rate', () => {
+    expect(new Bank().rate('USD', 'USD')).toBe(1);
+  });
 });
