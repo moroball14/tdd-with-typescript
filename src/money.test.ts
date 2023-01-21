@@ -1,3 +1,5 @@
+import { Bank } from './bank';
+import { Expression } from './expression';
 import { Money } from './money';
 
 describe('MoneyTest', () => {
@@ -12,10 +14,16 @@ describe('MoneyTest', () => {
     expect(Money.dollar(5).equals(Money.dollar(5))).toBe(true);
     expect(Money.dollar(5).equals(Money.dollar(6))).toBe(false);
     expect(Money.franc(5).equals(Money.dollar(5))).toBe(false);
-    // expect(Money.franc(10).equals(new Money(10, 'CHF'))).toBe(true);
   });
   it('currency', () => {
     expect(Money.dollar(1).getCurrency()).toBe('USD');
     expect(Money.franc(1).getCurrency()).toBe('CHF');
+  });
+  it('sum', () => {
+    const five: Money = Money.dollar(5);
+    const sum: Expression = five.plus(five);
+    const bank: Bank = new Bank();
+    const reduced: Money = bank.reduce(sum, 'USD');
+    expect(reduced.equals(Money.dollar(10))).toBe(true);
   });
 });

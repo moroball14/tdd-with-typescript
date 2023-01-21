@@ -1,4 +1,6 @@
-export class Money {
+import { Expression } from './expression';
+
+export class Money implements Expression {
   protected amount: number;
   protected currency: string;
   constructor(amount: number, currency: string) {
@@ -16,6 +18,10 @@ export class Money {
 
   public times = (multiplier: number): Money => {
     return new Money(this.amount * multiplier, this.currency);
+  };
+
+  public plus = (addend: Money): Expression => {
+    return new Money(this.amount + addend.amount, this.currency);
   };
 
   public getCurrency = (): string => {
