@@ -62,11 +62,22 @@ describe('MoneyTest', () => {
     const result: Money = bank.reduce(fiveBucks.plus(tenFrancs), 'USD');
     expect(result.equals(Money.dollar(10))).toBe(true);
   });
-  it('後で消すテスト', () => {
-    // coverageをC0 = 100%を閾値にしているため
-    // 実装が終わったら消す。
+  it('sum plus money', () => {
     const fiveBucks: Expression = Money.dollar(5);
-    const sum = new Sum(fiveBucks, fiveBucks);
-    sum.plus(fiveBucks);
+    const tenFrancs: Expression = Money.franc(10);
+    const bank: Bank = new Bank();
+    bank.addRate('CHF', 'USD', 2);
+    const sum = new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
+    const result: Money = bank.reduce(sum, 'USD');
+    expect(result.equals(Money.dollar(15))).toBe(true);
+  });
+  it('sum times', () => {
+    const fiveBucks: Expression = Money.dollar(5);
+    const tenFrancs: Expression = Money.franc(10);
+    const bank: Bank = new Bank();
+    bank.addRate('CHF', 'USD', 2);
+    const sum = new Sum(fiveBucks, tenFrancs).times(2);
+    const result: Money = bank.reduce(sum, 'USD');
+    expect(result.equals(Money.dollar(20))).toBe(true);
   });
 });

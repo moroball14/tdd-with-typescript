@@ -16,8 +16,9 @@ export class Bank {
   };
 
   public rate = (from: string, to: string): number => {
-    // TODO: ?? 0を返すのやめたい
     if (from === to) return 1;
-    return this.rates.get(new Pair(from, to).generateKey()) ?? 0;
+    const rate = this.rates.get(new Pair(from, to).generateKey());
+    if (rate === undefined) throw new Error();
+    return rate;
   };
 }
